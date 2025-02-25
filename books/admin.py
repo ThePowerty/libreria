@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from books.models import Autor, Editorial, Libro
+from books.models import Autor, Editorial, Libro, Contacto
 
 
 class LibroInline(admin.StackedInline):
@@ -13,7 +13,6 @@ class AutorAdmin(admin.ModelAdmin):
     ]
     ordering = ["apellido", "nombre", ]
 
-
 @admin.register(Editorial)
 class EditorialAdmin(admin.ModelAdmin):
     list_display = [
@@ -24,7 +23,6 @@ class EditorialAdmin(admin.ModelAdmin):
         LibroInline,
     ]
 
-
 @admin.register(Libro)
 class LibroAdmin(admin.ModelAdmin):
     list_display = [
@@ -34,5 +32,8 @@ class LibroAdmin(admin.ModelAdmin):
     search_fields = ["titulo", "autores__nombre"]
     filter_horizontal = ('autores', )
 
-
-
+@admin.register(Contacto)
+class ContactResource(admin.ModelAdmin):
+    model = Contacto
+    list_display = ("nombre", "contactado", "email", "created_at")
+    list_filter = ("contactado", )

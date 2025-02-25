@@ -1,8 +1,10 @@
 from django.shortcuts import render
 
-from books.models import Autor, Libro, Editorial
+from books.models import Autor, Libro, Editorial, Contacto
 from books.forms import SearchForm
 from .form import ContactForm
+
+from django.core.mail import send_mail
 
 def home_view(request):
     return render(request, 'general/home.html')
@@ -43,10 +45,25 @@ def contact_view(request):
             nombre = formulario.cleaned_data['nombre']
             email = formulario.cleaned_data['email']
             comentario = formulario.cleaned_data['comentario']
-            print(f'Se ha enviado un correo a {nombre} procedente de email {email} con el texto {comentario}')
+
+            message_content = f'{nombre} con email {email} ha escrito lo siguiente: {comentario}'
+
+            Contacto.objects.create(
+                nombre=nombre,
+                email=email,
+                comentario=comentario
+            )
+            success = send_mail(
+                "Formulario de contacto de mi Web",
+                message_content,
+                "w.infanzon.98@gmail.com",
+                ["w.infanzon.98@gmail.com"],
+                fail_silently=False,
+            )
+
             context = {
               'formulario' : formulario,
-              'success' : True
+              'success' : success
             }
             return render(request, "general/contacto.html", context)
         else:
