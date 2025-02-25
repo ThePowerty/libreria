@@ -1,0 +1,15 @@
+{% extends "general/layout.html" %}
+
+{% block head_title %}Página de Editoriales{% endblock %}
+{% block page_title %}Editoriales{% endblock %}
+
+{% block page_content %}
+  <h2>Lista completa de Editoriales</h2>
+  <ul>
+    {% for editorial in editoriales %}
+      <li>{{ editorial.nombre }}</a></li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}
+

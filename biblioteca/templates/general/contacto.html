@@ -1,0 +1,14 @@
+{% extends "general/layout.html" %}
+
+{% block head_title %}Página de contacto{% endblock %}
+{% block page_title %}Contacta con nosotros{% endblock %}
+
+
+{% block page_content %}
+  <form action="" method="POST">
+    {% csrf_token %} 
+    {{ formulario.as_p }}
+    <button>Enviar</button>
+  </form>
+  <p>Escríbenos a <a href="mailto:bienvenido.saez@conquerx.com">bienvenido.saez@conquerx.com</a></p>
+{% endblock %}
