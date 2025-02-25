@@ -10,9 +10,9 @@
     <p>Se ha enviado el formulario correctamente</p>
   {% else %}
     <form action="" method="POST">
-    {% csrf_token %} 
-    {{ formulario.as_p }}
+      {% csrf_token %} 
+      {{ formulario.as_p }}
     <button>Enviar</button>
-  </form>
+    </form>
   {% endif %}
 {% endblock %}

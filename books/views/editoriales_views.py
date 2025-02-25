@@ -17,7 +17,6 @@ class EditorialDetail(DetailView):
     context_object_name = "editorial"
     
 
-
 def editoriales_view(request):
     
     editoriales = Editorial.objects.all()
