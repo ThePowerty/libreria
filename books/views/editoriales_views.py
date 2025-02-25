@@ -3,6 +3,20 @@ from books.forms import EditorialModelFormCreate
 from books.models import Editorial
 from django.shortcuts import redirect
 from django.urls import reverse
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+
+class EditorialList(ListView):
+    model = Editorial
+    template_name = "editoriales/editoriales_ccbv.html"
+    context_object_name = "editoriales"
+
+class EditorialDetail(DetailView):
+    model = Editorial
+    template_name = "editoriales/editorial_detail_ccbv.html"
+    context_object_name = "editorial"
+    
+
 
 def editoriales_view(request):
     
