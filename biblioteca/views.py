@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from books.models import Autor, Libro, Editorial, Contacto
 from books.forms import SearchForm
-from .form import ContactForm
+from .form import ContactModelFormCreate
 
 from django.core.mail import send_mail
 
@@ -13,7 +13,7 @@ def search_view(request):
     if request.GET:
         formulario = SearchForm(request.GET)
 
-        busqueda = formulario.data['q']
+        busqueda = formulario.data['search']
 
         autores = Autor.objects.filter(nombre__icontains=busqueda)
         editoriales = Editorial.objects.filter(nombre__icontains=busqueda)
@@ -39,7 +39,7 @@ def search_view(request):
 
 def contact_view(request):
     if request.POST:
-        formulario = ContactForm(request.POST)
+        formulario = ContactModelFormCreate(request.POST)
 
         if formulario.is_valid():
             nombre = formulario.cleaned_data['nombre']
@@ -72,7 +72,7 @@ def contact_view(request):
             }
             return render(request, "general/contacto.html", context)
   
-    formulario = ContactForm()
+    formulario = ContactModelFormCreate()
     context = {
       'formulario' : formulario
     }

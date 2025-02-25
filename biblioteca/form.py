@@ -1,11 +1,15 @@
 from django import forms
+from django.forms import ModelForm
+from books.models import Contacto
 
-
-class ContactForm(forms.Form):
-    nombre = forms.CharField(max_length=50, label="Nombre")
-    email = forms.EmailField(label="Email")
-    comentario = forms.CharField(max_length=1000, label="Comentario", widget=forms.Textarea)
-
+class ContactModelFormCreate(ModelForm):
+    class Meta:
+        model = Contacto
+        fields = [
+            'nombre',
+            'email',
+            'comentario'
+        ]
     def clean_nombre(self):
         nombre = self.cleaned_data.get('nombre')
         if len(nombre) < 5:
