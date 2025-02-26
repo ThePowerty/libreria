@@ -6,12 +6,13 @@
 {% block page_content %}
   <h2>Menú</h2>
   <ul>
-    <li><a href="{% url 'books:libro_create' %}">Nuevo libro</a></li>
+    <li><a href="{% url 'libro:create' %}">Nuevo libro</a></li>
   </ul>
+  <hr>
   <h2>Lista completa de Libros</h2>
   <ul>
     {% for libro in libros %}
-      <li><a href="{% url 'books:libro_detail' libro.pk %}">{{ libro.titulo }}</a></li>
+      <li><a href="{% url 'libro:detail' libro.pk %}">{{ libro.titulo }}</a></li>
     {% endfor %}
   </ul>
 {% endblock %}

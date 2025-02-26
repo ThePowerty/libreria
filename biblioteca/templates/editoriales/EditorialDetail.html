@@ -8,5 +8,7 @@
     <p>Dirección: {{ editorial.direccion }}</p>
     <p>Email: {{ editorial.email }}</p>
 
-    <p><a href="{% url 'books:editorial_list' %}">Volver a la lista de editoriales</a></p>
+    <p><a href="{% url 'editorial:update' editorial.pk %}">Editar</a> - <a href="{% url 'editorial:delete' editorial.pk %}">Eliminar</a></p>
+    <br>
+    <p><a href="{% url 'editorial:list' %}">Volver a la lista de editoriales</a></p>
 {% endblock %}

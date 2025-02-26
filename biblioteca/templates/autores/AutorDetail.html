@@ -1,0 +1,16 @@
+{% extends "general/layout.html" %}
+
+{% block head_title %}Página detalle de Autor{% endblock %}
+{% block page_title %}Autor{% endblock %}
+
+{% block page_content %}
+  
+  <h2>Nombre del autor: {{ autor.nombre }}</h2>
+  <p>ID del Autor: {{ autor.id }}</p>
+  <p>Fecha de nacimiento: {{ autor.f_nac|date:"d-m-Y" }}</p>
+  <p>Volver a la <a href="{% url 'autor:list' %}">lista de autores</a></p>
+
+  <p><a href="{% url 'autor:update' autor.pk %}">Editar</a> - <a href="{% url 'autor:delete' autor.pk %}">Eliminar</a></p>
+  <br>
+  <p><a href="{% url 'autor:list' %}">Volver a la lista de autores</a></p>
+{% endblock %}

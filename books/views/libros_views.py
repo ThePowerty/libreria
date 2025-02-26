@@ -5,24 +5,17 @@ from django.views.generic.detail import DetailView
 from books.models import Libro
 from django.urls import reverse_lazy
 
-def libros_view(request):
-    libros = Libro.objects.all()
-
-    context = {
-        "libros": libros,
-        "titulo": "Lista de libros",
-    }
-    return render(request, 'libros/libros.html', context)
-
 class LibrosListView(ListView):
     model = Libro
-    template_name = "libros/libros.html"
+    template_name = "libros/LibroList.html"
     context_object_name = "libros"
+
 
 class LibroDetail(DetailView):
     model = Libro
-    template_name = "libros/libro_detail.html"
+    template_name = "libros/LibroDetail.html"
     context_object_name = "libro"
+
 
 class LibroCreateView(CreateView):
     model = Libro
@@ -32,8 +25,9 @@ class LibroCreateView(CreateView):
         "fecha_publicacion",
         "numero_paginas"
     ]
-    template_name = "libros/libro_create.html"
-    success_url = reverse_lazy('books:libros_list')
+    template_name = "libros/LibroCreate.html"
+    success_url = reverse_lazy('libro:list')
+
 
 class LibroUpdateView(UpdateView):
     model = Libro
@@ -43,11 +37,12 @@ class LibroUpdateView(UpdateView):
         "fecha_publicacion",
         "numero_paginas"
     ]
-    template_name = "libros/libro_update.html"
+    template_name = "libros/LibroUpdate.html"
     def get_success_url(self):
-        return reverse_lazy('books:libro_detail', kwargs={'pk': self.object.pk})
-    
+        return reverse_lazy('libro:detail', kwargs={'pk': self.object.pk})
+
+
 class LibroDeleteView(DeleteView):
     model = Libro
-    template_name = "libros/libro_delete.html"
-    success_url = reverse_lazy('books:libros_list')
+    template_name = "libros/LibroDelete.html"
+    success_url = reverse_lazy('libro:list')

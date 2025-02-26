@@ -1,0 +1,17 @@
+{% extends "general/layout.html" %}
+
+{% block head_title %}Página de Autores{% endblock %}
+{% block page_title %}Edicion de Autores{% endblock %}
+
+{% block page_content %}
+  <h2>Editar Autor</h2>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button>Guardar</button>
+      <a href="{% url 'autor:detail' object.pk %}">Cancelar</a>
+    </form>
+
+{% endblock %}
+
+
