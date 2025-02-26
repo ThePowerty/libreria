@@ -91,7 +91,7 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect(reverse('libreria:home'))
+                return redirect(reverse('home'))
             else:
                 context = {
                   'form': form,
@@ -114,7 +114,7 @@ def login_view(request):
     
 def logout_view(request):
     logout(request)
-    return redirect(reverse('libreria:home'))
+    return redirect(reverse('home'))
 
 def register_view(request):
     if request.POST:
@@ -149,4 +149,4 @@ def register_view(request):
         context = {
             'form': form
         }
-        return render(request, "general/login.html", context)
+        return render(request, "general/register.html", context)

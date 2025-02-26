@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import home_view, contact_view, search_view, login_view, register_view, logout_view
 
-app_name = "libreria"
 
 urlpatterns = [
     path("", home_view, name="home"),

@@ -133,6 +133,6 @@ EMAIL_HOST_USER='w.infanzon.98@gmail.com'
 EMAIL_HOST_PASSWORD='jbsy nzdw evkk cwxh'
 EMAIL_USE_TLS=True
 
-LOGIN_URL = reverse_lazy('libreria:login')
-LOGIN_REDIRECT_URL = reverse_lazy('libreria:home')
-LOGOUT_REDIRECT_URL = reverse_lazy('libreria:home')
+LOGIN_URL = reverse_lazy('login')
+LOGIN_REDIRECT_URL = reverse_lazy('home')
+LOGOUT_REDIRECT_URL = reverse_lazy('home')
