@@ -4,7 +4,8 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from books.models import Autor
 from django.contrib.auth.decorators import login_required
-
+from django.utils.decorators import method_decorator
+from books.decorators import user_can_delete_model
 
 class AutorListView(ListView):
     model = Autor
@@ -18,6 +19,7 @@ class AutorDetailView(DetailView):
     context_object_name = "autor"
 
 
+@method_decorator(login_required, name="dispatch")
 class AutorCreateView(CreateView):
     model = Autor
     fields=[
@@ -34,6 +36,7 @@ class AutorCreateView(CreateView):
         return super().form_valid(form)
 
 
+@method_decorator(login_required, name="dispatch")
 class AutorUpdateView(UpdateView):
     model = Autor
     fields=[
@@ -48,6 +51,7 @@ class AutorUpdateView(UpdateView):
         return reverse_lazy('autor:detail', kwargs={'pk': self.object.pk})
 
 
+@method_decorator(user_can_delete_model(Autor), name="dispatch")
 class AutorDeleteView(DeleteView):
     model = Autor
     template_name = "autores/AutorDelete.html"

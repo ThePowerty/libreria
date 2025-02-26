@@ -5,6 +5,8 @@ from django.views.generic.detail import DetailView
 from books.models import Libro
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from books.decorators import user_can_delete_model
 
 class LibrosListView(ListView):
     model = Libro
@@ -18,6 +20,7 @@ class LibroDetail(DetailView):
     context_object_name = "libro"
 
 
+@method_decorator(login_required, name="dispatch")
 class LibroCreateView(CreateView):
     model = Libro
     fields=[
@@ -33,6 +36,7 @@ class LibroCreateView(CreateView):
         return super().form_valid(form)
 
 
+@method_decorator(login_required, name="dispatch")
 class LibroUpdateView(UpdateView):
     model = Libro
     fields=[
@@ -46,6 +50,7 @@ class LibroUpdateView(UpdateView):
         return reverse_lazy('libro:detail', kwargs={'pk': self.object.pk})
 
 
+@method_decorator(user_can_delete_model(Libro), name="dispatch")
 class LibroDeleteView(DeleteView):
     model = Libro
     template_name = "libros/LibroDelete.html"
