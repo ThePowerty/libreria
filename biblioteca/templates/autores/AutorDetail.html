@@ -8,9 +8,12 @@
   <h2>Nombre del autor: {{ autor.nombre }}</h2>
   <p>ID del Autor: {{ autor.id }}</p>
   <p>Fecha de nacimiento: {{ autor.f_nac|date:"d-m-Y" }}</p>
-  <p>Volver a la <a href="{% url 'autor:list' %}">lista de autores</a></p>
 
-  <p><a href="{% url 'autor:update' autor.pk %}">Editar</a> - <a href="{% url 'autor:delete' autor.pk %}">Eliminar</a></p>
+  <p><a href="{% url 'autor:update' autor.pk %}">Editar</a> 
+    {% if autor.created_by == request.user %} 
+        - <a href="{% url 'autor:delete' autor.pk %}">Eliminar</a>
+    {% endif %}
+  </p>
   <br>
   <p><a href="{% url 'autor:list' %}">Volver a la lista de autores</a></p>
 {% endblock %}

@@ -4,16 +4,17 @@
 {% block page_title %}Libros{% endblock %}
 
 {% block page_content %}
-  <h2>Menú</h2>
-  <ul>
-    <li><a href="{% url 'libro:update' libro.pk %}">Editar libro</a></li>
-    <li><a href="{% url 'libro:delete' libro.pk %}">Eliminar libro</a></li>
-  </ul>
   <h2>Titulo: {{ libro.titulo }}</h2>
   <p>ISBN: {{ libro.isbn }}</p>
   <p>Fecha Publicación: {{ libro.fecha_publicacion }}</p>
   <p>Número de Páginas {{ libro.numero_paginas }}</p>
-  <p>Volver a <a href="{% url 'libro:list' %}">Lista de libros</a></p>
-  
+
+  <p><a href="{% url 'libro:update' libro.pk %}">Editar</a> 
+    {% if libro.created_by == request.user %} 
+        - <a href="{% url 'libro:delete' libro.pk %}">Eliminar</a>
+    {% endif %}
+  </p>
+  <br>
+  <p>Volver a <a href="{% url 'libro:list' %}">Lista de libros</a></p>  
 {% endblock %}
 

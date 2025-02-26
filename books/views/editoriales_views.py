@@ -1,8 +1,11 @@
+from django.forms.models import BaseModelForm
+from django.http import HttpResponse
 from books.models import Editorial
 from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.decorators import login_required
 
 class EditorialListView(ListView):
     model = Editorial
@@ -26,7 +29,9 @@ class EditorialCreateView(CreateView):
     ]
     template_name = "editoriales/EditorialCreate.html"
     success_url = reverse_lazy('editorial:list')
-
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
 
 class EditorialUpdateView(UpdateView):
     model = Editorial

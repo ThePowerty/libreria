@@ -3,16 +3,20 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from books.models import Autor
+from django.contrib.auth.decorators import login_required
+
 
 class AutorListView(ListView):
     model = Autor
     template_name = "autores/AutorList.html"
     context_object_name = "autores"
 
+
 class AutorDetailView(DetailView):
     model = Autor
     template_name = "autores/AutorDetail.html"
     context_object_name = "autor"
+
 
 class AutorCreateView(CreateView):
     model = Autor
@@ -25,6 +29,9 @@ class AutorCreateView(CreateView):
     ]
     template_name = "autores/AutorCreate.html"
     success_url = reverse_lazy('autor:list')
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
 
 
 class AutorUpdateView(UpdateView):

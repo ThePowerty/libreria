@@ -4,6 +4,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from books.models import Libro
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 
 class LibrosListView(ListView):
     model = Libro
@@ -27,6 +28,9 @@ class LibroCreateView(CreateView):
     ]
     template_name = "libros/LibroCreate.html"
     success_url = reverse_lazy('libro:list')
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
 
 
 class LibroUpdateView(UpdateView):
