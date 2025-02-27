@@ -65,6 +65,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "biblioteca.context_processor.get_current_year_context_processor",
+                "biblioteca.context_processor.get_statistics_books",
+                "biblioteca.context_processor.get_clave",
             ],
         },
     },
@@ -125,13 +128,29 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#Configuración de variables de entorno
+
+import environ
+import os
+
+env = environ.Env(
+    
+)
+
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+HOST = env('HOST')
+EMAIL = env('EMAIL')
+PASSWD = env('PASSWD')
+
 # Configuración de correo
 
-EMAIL_HOST='smtp.gmail.com'
+EMAIL_HOST=HOST
 EMAIL_PORT=587
-EMAIL_HOST_USER='w.infanzon.98@gmail.com'
-EMAIL_HOST_PASSWORD='jbsy nzdw evkk cwxh'
+EMAIL_HOST_USER=EMAIL
+EMAIL_HOST_PASSWORD=PASSWD
 EMAIL_USE_TLS=True
+
+# DEFAULT REDIRECT URLS
 
 LOGIN_URL = reverse_lazy('login')
 LOGIN_REDIRECT_URL = reverse_lazy('home')
