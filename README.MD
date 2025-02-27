@@ -67,7 +67,7 @@ python manage.py createsuperuser --username=admin --email=admin@example.com
 ```
 Por razones de seguridad Django no permite establecer la contraseña como un parámetro por ello debe ser ingresada de forma interactiva.
 
-#### **Recomendación**:
+**Recomendación**:
 - **Nombre de usuario**: `admin`
 - **Email de usuario**: `admin@example.com`
 - **Contraseña**: `admin123.`
