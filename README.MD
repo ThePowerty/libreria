@@ -1,5 +1,5 @@
 # Proyecto Librería
-## Proyecto realizado con Django para la gestión de una librería
+Proyecto realizado con Django para la gestión de una librería
 
 ## Advertencias
 
